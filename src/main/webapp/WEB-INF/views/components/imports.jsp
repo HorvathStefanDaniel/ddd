@@ -2,7 +2,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+<link rel="shortcut icon" href="/ddd/favicon.ico" type="image/x-icon">
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -12,6 +14,7 @@
 	rel="stylesheet"
 	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
 	crossorigin="anonymous">
+	
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 

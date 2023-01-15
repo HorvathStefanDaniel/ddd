@@ -56,6 +56,10 @@
 			</div>
 		</footer>
 	</div>
+	
+	<script type="text/javascript">
+		console.log("Message: " + "${sessionMessages}");
+	</script>
 
 
 </body>

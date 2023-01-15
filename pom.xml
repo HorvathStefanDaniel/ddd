@@ -18,6 +18,8 @@
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
+		<!--Session stuff-->
+		
 		<!--Database stuff-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
