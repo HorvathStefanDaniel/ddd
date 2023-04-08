@@ -1,5 +1,30 @@
 @charset "ISO-8859-1";
 
+/*baLLS*/
+/* .outer-metaballs-container {filter: brightness(100%) contrast(1200%);} */
+/* .inner-metaballs-container {filter: blur(20px)} */
+/* canvas {filter: brightness(100%) contrast(1200%);} */
+
+canvas{
+  	filter: brightness(100%) contrast(1.1);
+  	background: black;
+}
+
+.meta {
+  content: "";
+  position: absolute;
+  width:100px;
+  height:100px;
+  left:50%;
+  top:50%;
+  margin:-50px;
+  background: rgba(160,230,245,.9);
+  border-radius:50%;
+  -webkit-filter: blur(25px);
+  filter: blur(25px);
+  animation: move 12s infinite alternate ease-in-out;
+}
+
 /*
  * Globals
  Some code based on css from https://getbootstrap.com/docs/4.3/examples/cover/#
@@ -96,4 +121,40 @@ body {
  */
 .mastfoot {
 	color: rgba(255, 255, 255, .5);
+}
+
+/*For the matterJs*/
+body {
+	margin: 0;
+	padding: 0;
+	display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+.matter-btn-compare.matter-btn {
+	font-size: 18px;
+	text-align: center;
+	line-height: 32px;
+}
+
+.matter-js-compare-build.matter-demo {
+	position: absolute;
+	background: none;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border: 0;
+	z-index: 1;
+	pointer-events: none;
+}
+
+.matter-js-compare-build.matter-demo .matter-header-outer {
+	display: none;
+}
+
+.matter-js-compare-build.matter-demo canvas {
+	opacity: 0.5;
+	background: transparent !important;
 }
