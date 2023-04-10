@@ -2,11 +2,16 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
+
 <jsp:include page='components/imports.jsp'>
 	<jsp:param name="someParam" value="false" />
 </jsp:include>
 
 <style>
+html {
+	overflow: hidden;
+}
+
 .bd-placeholder-img {
 	font-size: 1.125rem;
 	text-anchor: middle;
@@ -20,6 +25,87 @@
 	.bd-placeholder-img-lg {
 		font-size: 3.5rem;
 	}
+}
+
+/* Jelly styles */
+.jelly-container {
+	position: static;
+	display: block;
+	left: 150px;
+	top: 500px;
+}
+
+#lawd {
+	margin: auto;
+	width: auto;
+	height: auto;
+	display: block;
+	max-width: 100%;
+	position: relative;
+}
+
+.jelly-container, .jelly-container2 {
+	height: 400px;
+	width: 400px;
+	height: auto;
+}
+
+.jelly-canvas, .jelly-canvas2 {
+	width: 400px;
+	height: 400px;
+}
+
+.jelly-container {
+	padding-left: 812px;
+}
+
+.breast-container {
+	margin: auto;
+	width: auto;
+	height: auto;
+	width: 100%;
+	position: relative;
+	display: flex;
+	top: -332px;
+	justify-content: space-around;
+	align-items: center;
+	flex-direction: row;
+	left: -579px;
+}
+
+/* It's important to position the `.centroid-container` in the top-left corner
+   This way the `.centroid-text` will be positioned in the center (with JavaScript) */
+.centroid-container {
+	position: absolute;
+	top: 0;
+	transform: translate(-100%, -40%);
+	pointer-events: none;
+}
+
+.centroid-container2 {
+	position: absolute;
+	top: 0;
+	pointer-events: none;
+	transform: translate(0%,-40%);
+}
+
+.centroid-text, .centroid-text2 {
+	font-size: 100px;
+	color: white;
+}
+
+#container {
+	display: block;
+	width: 100%;
+	height: auto;
+	margin: auto;
+}
+
+#svgCont {
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	z-index: -99;
 }
 </style>
 <!-- Custom styles for this template -->
@@ -37,285 +123,88 @@
 				</nav>
 			</div>
 		</header>
-
 		<main role="main" class="inner cover">
-			<h1 class="cover-heading">Cover your page.</h1>
-			<p class="lead">Cover is a one-page template for building simple
-				and beautiful home pages. Download, edit the text, and add your own
-				fullscreen background photo to make it your own.</p>
+			<h1 class="cover-heading">Suck-u Hotel.</h1>
 			<p class="lead">
-				<a href="#" class="btn btn-lg btn-secondary">Learn more</a>
+				Explore a den of depravity as you fight to preserve your soul and
+				your dignity.<br>Cooming to steam soon&#8482;
+			</p>
+			<p class="lead">
+				<a href="#" class="btn btn-lg btn-secondary">WISHLIST NOW</a>
 			</p>
 		</main>
 
-		<footer class="mastfoot mt-auto">
-			<div class="inner">
-				<p>
-					Made by <a href="https://twitter.com/mdo">@mdo</a> 2023 ${msg}
-				</p>
-			</div>
-		</footer>
+		<jsp:include page='components/footer.jsp' />
+		<div id="svgCont">
+			<svg viewBox="0 0 400 400 " width="320" height="320"
+				xmlns="http://www.w3.org/2000/svg">
+				<ellipse id="svgA"
+					style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" cx="200"
+					cy="200" rx="150" ry="150" />
+				</svg>
+		</div>
 	</div>
+
+	<div
+		style="aspect-ratio: auto 800/600; background: 0% 0%/contain rgb(20, 21, 31);">
+		<div id="interactiveArea"
+			style="background: 0% 0%/contain rgb(20, 21, 31);">
+			<div id="container">
+				<img id="lawd" src="../ddd/sprites/ohLawd.png"></img>
+				<div class="breast-container">
+					<div class="jelly-container">
+						<canvas class="jelly-canvas"></canvas>
+						<!-- Text in the centroid of the jelly pentagon -->
+						<div class="centroid-container">
+							<div class="centroid-text">$</div>
+						</div>
+					</div>
+					<div class="jelly-container2">
+						<canvas class="jelly-canvas2"></canvas>
+						<!-- Text in the centroid of the jelly pentagon -->
+						<div class="centroid-container2">
+							<div class="centroid-text2">$</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<script src="../ddd/matter.min.js" type="text/javascript"></script>
+	<script src="../ddd/jelly.min.js" type="text/javascript"></script>
 	<script type="text/javascript">
-	//defining a soft body
-	/**
-* Creates a simple soft body like object.
-* @method softBody
-* @param {number} xx
-* @param {number} yy
-* @param {number} columns
-* @param {number} rows
-* @param {number} columnGap
-* @param {number} rowGap
-* @param {boolean} crossBrace
-* @param {number} particleRadius
-* @param {} particleOptions
-* @param {} constraintOptions
-* @return {composite} A new composite softBody
-*/
-	isCircle = (i, j, columns, rows, circleEq)=>{
-		var calc = Math.pow(i-columns/2,2) + Math.pow(j-rows/2,2);
-// 		console.log(i + " " + j + " " + columns + " " + rows + " " + calc + " " + circleEq);
-		return false;
-		return  calc+1 >= circleEq;
-	}
-	//jquery on ready
-	$(()=>{
-		//define a simple soft body. Basically an array of constrained body
-		const softBody = function(xx, yy, columns, rows, columnGap, rowGap, crossBrace, particleRadius, particleOptions, toStatic, constraintOptions) {
-		    var Common = Matter.Common,
-		        Composites = Matter.Composites,
-		        Bodies = Matter.Bodies;
-		    
-		    particleOptions = Common.extend({ inertia: Infinity }, particleOptions);
-		    constraintOptions = Common.extend({ 
-		    	stiffness: 0.2, 
-		    	density: 0.0005,
-                frictionAir: 0.06,
-                restitution: 0.3,
-                friction: 0.01,
-                
-		    	render: {
-		    		anchors: false, 
-		    		type:"line",
-		    		visible: false
-		   	 	} 
-		    }, constraintOptions);
-		    //added
-		    var colMid = Math.floor(columns/2);
-		    var rowMid =  Math.floor(rows/2);
-		    /*
-		    	Circle equation:
-		    	To create a circle (boob) using a square array, we need the following ecuation
-		    	A square with a side length of 5 can fit a circle with the radius of 5/2
-		    	If you have one point per mu ...
-		    	The circle equation will be x^2 + y^2 = (5/2)^2
-		    	And the square can be described as -5 < x < 5 and -5 < y < 5
-		    	So we only want to keep points that can obey all the above rules: x^2 + y^2 = (r/2)^2 and -r < x < r and -r < y < r
-		    */
-		    //use whichever is smaller between columns and rows
-		    var r = columns > rows ? rows : columns;
-		    
-		    //x^2 + y^2 must equal circleEq to not be removed
-		    var circleEq = Math.pow((r / 2),2);
-		    
-		    //using i and j instead of x and y
-		    
-		    //an array of 1s and 0s that serves as a mask to create a circle array. 2 means it should be static
-		    var andArray = new Array(columns);
-		    for(var i = 0; i<columns; i++){
-		    	andArray[i] = new Array(rows);
-			    for(var j = 0; j<rows; j++){
-		    		if(colMid <= i+toStatic && colMid > i-toStatic && rowMid <= j+toStatic && rowMid > j-toStatic){
-		    			andArray[i][j] = 2;
-		    		}
-		    		else if(isCircle(i,j,columns, rows, circleEq)){
-		    			andArray[i][j] = 0;
-	    			}else{
-	    				andArray[i][j] = 1;
-	    			}
-		    	}
-		    }
-		    
-			var curRow = 0;
-			var curCol = 0;
-			console.log(andArray);
-		    var softBody = Composites.stack(xx, yy, columns, rows, columnGap, rowGap, (x, y)=> {
-		    	particleOptions.render = {
-				    	sprite: {
-		                    texture: '/ddd/sprites/skin.png',
-		                    yScale : 1,
-		                    xScale : 1
-		                }
-			   	 	};
-		    	if(andArray[curRow][curCol] == 1){
-			        //this might need to be the other way arround
-		    		if(curCol < columns-1){
-		    			curCol++;
-			        }else{
-			        	curCol = 0;
-			        	curRow++;
-			        }
-		    		return Bodies.circle(x, y, particleRadius, particleOptions);
-		    	}else if (andArray[curRow][curCol] == 2){
-		    		if(curCol < columns-1){
-		    			curCol++;
-			        }else{
-			        	curCol = 0;
-			        	curRow++;
-			        }
-		    		//make it static
-		    		var toRet = Bodies.circle(x, y, particleRadius, particleOptions);
-		    		toRet.isStatic = true;
-		    		toRet.class="outer-metaballs-container";
-		    		return toRet;
-		    	}else{
-		    		if(curCol < columns-1){
-		    			curCol++;
-			        }else{
-			        	curCol = 0;
-			        	curRow++;
-			        }
-		    		//return with no radius ? or delete it somehow
-// 		    		var toRet = Bodies.circle(x, y, 0, particleOptions);
-		    		var optionsCopy = particleOptions;
-		    		optionsCopy.mass = 0;
-		    		optionsCopy.friction = 100;
-		    		optionsCopy.opacity = 0;
-		    		var toRet = Bodies.circle(x, y, 1, optionsCopy.opacity);
-		    		toRet.class="meta";
-		    		return toRet;
-		    	}
-		    });
-		    
-		    Composites.mesh(softBody, columns, rows, crossBrace, constraintOptions);
-
-		    softBody.label = 'Soft Body';
-		    softBody.class = "outer-metaballs-container";
-
-		    return softBody;
+		var options = {
+			paths : '#svgA', // Shape we want to draw
+			pointsNumber : 15, // Number of points
+			maxDistance : 3, // Max distance among points
+			color : '#FFFF00',
+			centroid : '.centroid-text', // Element to move accordingly with the centroid of the shape
+			mouseIncidence : 3,
+			border : "#C17B75",
+			// 			image : "../ddd/sprites/skin.png"
+			image : "../ddd/sprites/yellowDollan.png"
+		// 			,debug : true
+		// Uncomment this to see the points
 		};
-		// module aliases
-		var Engine = Matter.Engine,
-	        Render = Matter.Render,
-	        Runner = Matter.Runner,
-	        Composites = Matter.Composites,
-	        Common = Matter.Common,
-	        MouseConstraint = Matter.MouseConstraint,
-	        Mouse = Matter.Mouse,
-	        Composite = Matter.Composite,
-	        Bodies = Matter.Bodies;
-		
-		// create an engine
-		var engine = Engine.create();
+		var options2 = {
+			paths : '#svgA', // Shape we want to draw
+			pointsNumber : 15, // Number of points
+			maxDistance : 3, // Max distance among points
+			color : '#FFFF00',
+			centroid : '.centroid-text2', // Element to move accordingly with the centroid of the shape
+			mouseIncidence : 3,
+			border : "black",
+			// 			image : "../ddd/sprites/skin.png"
+			image : "../ddd/sprites/yellowDollan.png"
+		// 			,debug : true
+		// Uncomment this to see the points
+		};
 
-		// create a renderer
-		var render = Render.create({
-	        element: document.body,
-	        engine: engine,
-	        options: {
-	            showAngleIndicator: false,
-	            wireframes: false
-	        }
-	    });
+		/* Initializing jelly */
 
-	    // add bodies
-	    var offset = 10,
-	        options = { 
-	            isStatic: true
-	        };
-
-	    // these static walls will not be rendered in this sprites example, see options
-	    Composite.add(engine.world, [
-	        Bodies.rectangle(400, -offset, 800.5 + 2 * offset, 50.5, options),
-	        Bodies.rectangle(400, 600 + offset, 800.5 + 2 * offset, 50.5, options),
-	        Bodies.rectangle(800 + offset, 300, 50.5, 600.5 + 2 * offset, options),
-	        Bodies.rectangle(-offset, 300, 50.5, 600.5 + 2 * offset, options)
-	    ]);
-	    
-	    //soft bodies ;)
-	    var particleOptions = {
-				mass: 3,
-	            friction: 1,
-	            frictionStatic: 1,
-	            render: { visible: false } 
-	        };
-	
-	    var xx = 200, yy = 200, columns = 5, rows = 5, columnGap = 1, rowGap = 1, crossBrace = true, particleRadius = 15, particleOptions = particleOptions, toStatic = 1;
-	    Composite.add(engine.world, [
-	        // see softBody function defined later in this file
-	        softBody(xx, yy, columns, rows, columnGap, rowGap, crossBrace, particleRadius, particleOptions, toStatic),
-// 	       	softBody(400, 300, 8, 3, 0, 0, true, 15, particleOptions),
-// 			softBody(250, 400, 4, 4, 0, 0, true, 15, particleOptions),
-	    ]);
-	    
-	    //making sprites
-// 	    var stack = Composites.stack(400, 200, 2, 2, 1, 1, function(x, y) {
-// 	        if (Common.random() > 0.5) {
-// 	            return Bodies.rectangle(x, y, 32, 32, {
-// 	                render: {
-// 	                    strokeStyle: '#ffffff',
-// 	                    sprite: {
-// 	                        texture: '/ddd/sprites/box.png',
-// 	                        yScale : 0.5,
-// 	                        xScale : 0.5
-// 	                    }
-// 	                }
-// 	            });
-// 	        } else {
-// 	            return Bodies.circle(x, y, 16, {
-// 	                density: 0.0005,
-// 	                frictionAir: 0.06,
-// 	                restitution: 0.3,
-// 	                friction: 0.01,
-// 	                render: {
-// 	                    sprite: {
-// 	                        texture: '/ddd/sprites/ball.png',
-// 	                        yScale : 0.5,
-// 	                        xScale : 0.5
-// 	                    }
-// 	                }
-// 	            });
-// 	        }
-// 	    });
-	    
-		//add mouse control
-	    var mouse = Mouse.create(render.canvas),
-	        mouseConstraint = MouseConstraint.create(engine, {
-	            mouse: mouse,
-	            constraint: {
-	                stiffness: 0.2,
-	                render: {
-	                    visible: true
-	                }
-	            }
-	        });
-
-	    Composite.add(engine.world, mouseConstraint);
-
-	    // keep the mouse in sync with rendering
-	    render.mouse = mouse;
-
-	    // fit the render viewport to the scene
-	    Render.lookAt(render, {
-	        min: { x: 0, y: 0 },
-	        max: { x: 800, y: 600 }
-	    });
-
-// 	    Composite.add(engine.world, stack);
-
-		// run the renderer
-		Render.run(render);
-
-		// create runner
-		var runner = Runner.create();
-
-		// run the engine
-		Runner.run(runner, engine);
-		
-	});
-
+		var jelly = new Jelly('.jelly-canvas', options);
+		var jelly = new Jelly('.jelly-canvas2', options2);
 	</script>
 </body>
 </html>

@@ -30,32 +30,29 @@
 			<div class="inner">
 				<h3 class="masthead-brand">${setting.projectName}</h3>
 				<nav class="nav nav-masthead justify-content-center">
-					<a class="nav-link" href="/ddd/">Home</a> 
-					<a class="nav-link active" href="/ddd/demo">DEMO</a> 
+					<a class="nav-link" href="/ddd/">Home</a> <a
+						class="nav-link active" href="/ddd/demo">DEMO</a>
 				</nav>
 			</div>
 		</header>
-		
+
 		<main role="main" class="inner cover">
 			<h1 class="cover-heading">Coomer hotel demo.</h1>
-			<p class="lead">Use arrow keys to move, x to interact.<br>To reset/restart just refresh the page :)</p>
+			<p class="lead">
+				Use arrow keys to move, x to interact.<br>To reset/restart just
+				refresh the page :)
+			</p>
 			<p class="lead">
 				<a href="#" class="btn btn-lg btn-secondary">Learn more</a>
 			</p>
 		</main>
 
-		<footer class="mastfoot mt-auto">
-			<div class="inner">
-				<p>
-					Made by <a href="https://twitter.com/mdo">@mdo</a> 2023 ${msg}
-				</p>
-			</div>
-		</footer>
+		<jsp:include page='components/footer.jsp' />
 	</div>
-	<div style="aspect-ratio: auto 800 / 600; background:  0% 0% / contain rgb(20, 21, 31);"></div>
+	<div style="aspect-ratio: auto 800/600; background: 0% 0%/contain rgb(20, 21, 31);"></div>
 
 	<script type="text/javascript">
-	
+		
 	</script>
 </body>
 </html>
