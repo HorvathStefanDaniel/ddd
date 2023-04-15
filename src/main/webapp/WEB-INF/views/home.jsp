@@ -37,7 +37,7 @@ html {
 
 #lawd {
 	margin: auto;
-	width: auto;
+	width: 700px;
 	height: auto;
 	display: block;
 	max-width: 100%;
@@ -45,32 +45,31 @@ html {
 }
 
 .jelly-container, .jelly-container2 {
-	height: 400px;
-	width: 400px;
-	height: auto;
+	height: 200px;
+	width: 200px;
 }
 
 .jelly-canvas, .jelly-canvas2 {
-	width: 400px;
-	height: 400px;
+	width: 200px;
+	height: 200px;
 }
 
 .jelly-container {
-	padding-left: 812px;
+	padding-left: 270px;
 }
 
 .breast-container {
+	max-width: 100%;
 	margin: auto;
-	width: auto;
 	height: auto;
-	width: 100%;
+	width: 700px;
 	position: relative;
 	display: flex;
-	top: -332px;
+	top: -162px;
 	justify-content: space-around;
 	align-items: center;
 	flex-direction: row;
-	left: -579px;
+	left: -202px;
 }
 
 /* It's important to position the `.centroid-container` in the top-left corner
@@ -90,7 +89,7 @@ html {
 }
 
 .centroid-text, .centroid-text2 {
-	font-size: 100px;
+	font-size: 50px;
 	color: white;
 }
 
@@ -136,11 +135,11 @@ html {
 
 		<jsp:include page='components/footer.jsp' />
 		<div id="svgCont">
-			<svg viewBox="0 0 400 400 " width="320" height="320"
+			<svg viewBox="0 0 180 180 " width="180" height="180"
 				xmlns="http://www.w3.org/2000/svg">
 				<ellipse id="svgA"
-					style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" cx="200"
-					cy="200" rx="150" ry="150" />
+					style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" cx="100"
+					cy="100" rx="75" ry="69" />
 				</svg>
 		</div>
 	</div>
@@ -176,7 +175,7 @@ html {
 	<script type="text/javascript">
 		var options = {
 			paths : '#svgA', // Shape we want to draw
-			pointsNumber : 15, // Number of points
+			pointsNumber : 13, // Number of points
 			maxDistance : 3, // Max distance among points
 			color : '#FFFF00',
 			centroid : '.centroid-text', // Element to move accordingly with the centroid of the shape

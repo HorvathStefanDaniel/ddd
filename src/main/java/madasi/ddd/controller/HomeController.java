@@ -29,57 +29,61 @@ import madasi.ddd.service.UserRepository;
 
 @Controller
 public class HomeController {
-	
+
 	Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
+
 	String PROJECT_NAME = "Romanian TVEE's gaming studio";
-	
+
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Autowired
 	private SettingRepository settingRepository;
-	
-	//executes on startup
+
+	// executes on startup
 	@PostConstruct
 	void onStartup() {
-		logger.info("SHALOM");
-		Optional<Setting> s = settingRepository.findById(1);
-		Setting setupSet;
-		if(s.isEmpty()) {
-			setupSet = new Setting();
-			setupSet.setId(1);
-			settingRepository.save(setupSet);
-		}else {
-			setupSet = s.get();
+		try {
+			logger.info("HELLO");
+			Optional<Setting> s = settingRepository.findById(1);
+			Setting setupSet;
+			if (s.isEmpty()) {
+				setupSet = new Setting();
+				setupSet.setId(1);
+				settingRepository.save(setupSet);
+			} else {
+				setupSet = s.get();
+			}
+			setupSet.setProjectName(PROJECT_NAME);
+			settingRepository.save(s.get());
+			logger.info(s.toString());
+
+		} catch (Exception e) {
+			logger.error("On startup error: ", e);
 		}
-		setupSet.setProjectName(PROJECT_NAME);
-		settingRepository.save(s.get());
-		logger.info(s.toString());
-		
 	}
-	
-	//automatically ads settings object to pages
+
+	// automatically ads settings object to pages
 	@ModelAttribute
 	public void addAttributes(Model model) {
 		Optional<Setting> s = settingRepository.findById(1);
-	    model.addAttribute("setting", s.get());
+		model.addAttribute("setting", s.get());
 	}
 
 	@RequestMapping("/")
-    public String home(Model model, HttpSession session) {
+	public String home(Model model, HttpSession session) {
 		String messages = "Hello";
-		
+
 		model.addAttribute("msg", messages);
-		
-    	return "home";
-    }
-	
+
+		return "home";
+	}
+
 	@RequestMapping("/demo")
 	public String demo(Model model, HttpSession session) {
 		return "demo";
 	}
-	
+
 //	@PostMapping("/persistMessage")
 //	public ResponseEntity<List<String>> persistMessage(@RequestParam("msg") String msg, HttpServletRequest request) {
 //		@SuppressWarnings("unchecked")
@@ -94,17 +98,16 @@ public class HomeController {
 //	}
 
 	@GetMapping("/showUser/{id}")
-	public String users(@PathVariable("id") String userId,
-			Model model) {
-		
+	public String users(@PathVariable("id") String userId, Model model) {
+
 		try {
 			User u = userRepository.findById(Integer.valueOf(userId)).get();
 			model.addAttribute("savedUser", u);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			logger.error("Error in showUser, maybe invalid ID or couldn't connect to database", e);
 		}
-			
+
 		return "userDetails";
 	}
-	
+
 }
