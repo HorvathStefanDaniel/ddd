@@ -1,0 +1,120 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>ddd</title>
+
+<link href="webjars/bootstrap/5.2.3/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<link rel="stylesheet" href="/ddd/css/general.css">
+
+<link rel="shortcut icon" href="/ddd/favicon.ico" type="image/x-icon">
+
+
+<script src="webjars/bootstrap/5.2.3/js/bootstrap.min.js"></script>
+<script src="webjars/jquery/3.6.3/jquery.min.js"></script>
+<!-- Custom styles for this template -->
+</head>
+<body class="text-center overflow-hidden">
+	<div style="width: 100%; max-width: 100%;"
+		class="cover-container d-flex w-100 h-100 mx-auto flex-column">
+		<header class="masthead mb-auto p-3">
+			<div id="navbar" class="inner">
+				<a id="logoLink" class="nav-link" href="/ddd/">
+					<h3 class="masthead-brand">Vee	gaming</h3>
+				</a>
+				<nav id="centered-nav"
+					class="nav nav-masthead justify-content-center">
+					<a class="nav-link" href="/ddd/story">Story</a> <a class="nav-link"
+						href="/ddd/demo">Demo</a> <a class="nav-link"
+						href="/ddd/characters">Characters</a>
+				</nav>
+				<nav class="nav nav-masthead nav2-fix">
+					<a class="nav-link" href="/ddd/contact">Contact</a>
+				</nav>
+			</div>
+		</header>
+		<div id="logo">
+			<img id="logoImage" src="images/circle.png" alt="Logo spinning">
+		</div>
+		<div id="main" role="main" class="inner cover position-absolute p-3">
+			<h1 class="cover-heading">
+				Game coming out <b>SOON&#8482;</b>.
+			</h1>
+			<p class="lead">Some description&#8482;</p>
+			<p class="lead">
+				<a href="#" class="btn btn-lg btn-secondary">WISHLIST NOW</a>
+			</p>
+		</div>
+		<footer class="mastfoot mt-auto p-3">
+			<div class="inner">
+				<p>
+<!-- 					Made by <a href="">@stu</a> 2023 -->
+				</p>
+			</div>
+			<img id="veeBackground" src="images/v.png" alt="Vee peeking">
+		</footer>
+	</div>
+	<div id="pageBg"></div>
+	<div id="pageBgEffect"></div>
+	<script type="text/javascript">
+		
+		//make the background beat faster when closer to the purchase button. Could make a linear function so the closer you are the closer it beats but, too lazy rn
+	
+		var m;
+		var mHeight;
+		var initMouseX = 0;
+		var initMouseY = 0;
+		//when ready
+		$(document).ready(()=>{
+			
+			$( "#main" ).on( "mouseenter", beatFaster ).on( "mouseleave", beatNormal );
+			m = document.querySelector('#main');
+			mHeight = m.offsetHeight;
+			var didOnce = false;
+			$('html').mousemove((e)=>{
+				if(didOnce === false){
+					initMouseX = e.pageX;
+					initMouseY = e.pageY;
+					didOnce = true;
+				}
+				
+				var mousePosX = ((e.pageX - initMouseX) / $(window).width()) * 100;
+				
+// 				$('#pageBg').css(
+// 						'background-position-x',
+// 						mousePosX + 50 + '%');
+				
+				$('#pageBgEffect').css(
+						'background-position-x',
+						-mousePosX + '%');
+				
+				var mousePosY = ((e.pageY - initMouseY) / $(window).height()) * 110;
+				
+// 				$('#pageBg').css(
+// 						'background-position-y',
+// 						mousePosY + 50 + '%');
+				
+				$('#pageBgEffect').css(
+						'background-position-y',
+						-mousePosY + '%');
+				
+				return;
+				
+			});
+		});
+		
+		function beatFaster(){
+			$("#pageBg").addClass("beatFaster");
+			$("#logoImage").addClass("beatFaster");
+		}
+		
+		function beatNormal(){
+			$("#pageBg").removeClass("beatFaster");
+			$("#logoImage").removeClass("beatFaster");
+		}
+	</script>
+</body>
+</html>

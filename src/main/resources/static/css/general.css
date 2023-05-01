@@ -9,20 +9,19 @@
 /*   	filter: brightness(100%) contrast(1.1); */
 /*   	background: black; */
 /* } */
-
 .meta {
-  content: "";
-  position: absolute;
-  width:100px;
-  height:100px;
-  left:50%;
-  top:50%;
-  margin:-50px;
-  background: rgba(160,230,245,.9);
-  border-radius:50%;
-  -webkit-filter: blur(25px);
-  filter: blur(25px);
-  animation: move 12s infinite alternate ease-in-out;
+	content: "";
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	left: 50%;
+	top: 50%;
+	margin: -50px;
+	background: rgba(160, 230, 245, .9);
+	border-radius: 50%;
+	-webkit-filter: blur(25px);
+	filter: blur(25px);
+	animation: move 12s infinite alternate ease-in-out;
 }
 
 /*
@@ -31,8 +30,8 @@
  */
 
 /* Links */
-a, a:focus, a:hover {
-	color: #fff;
+a:focus, a:hover {
+	color: rgba(255, 255, 255, 0.75);
 }
 
 /* Custom default button */
@@ -48,7 +47,7 @@ a, a:focus, a:hover {
  */
 html, body {
 	height: 100%;
-	background-color: #333;
+	background-color: rgb(0, 0, 0);
 }
 
 body {
@@ -59,19 +58,29 @@ body {
 	box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
 }
 
-.cover-container {
-	max-width: 42em;
-}
-
 /*
  * Header
  */
 .masthead {
 	margin-bottom: 2rem;
+	background-color:#580b2d;
+	z-index:1;
+    opacity: 95%;
 }
 
 .masthead-brand {
 	margin-bottom: 0;
+	color:white;
+	-webkit-text-stroke: 1px #f336fd;
+}
+
+#logoLink{
+	z-index:2;
+}
+
+#centered-nav .nav-link{
+	width:6rem;
+	margin:0px;
 }
 
 .nav-masthead .nav-link {
@@ -83,7 +92,7 @@ body {
 }
 
 .nav-masthead .nav-link:hover, .nav-masthead .nav-link:focus {
-	border-bottom-color: rgba(255, 255, 255, .25);
+	border-bottom-color: rgba(255, 255, 255, 0.5);
 }
 
 .nav-masthead .nav-link+.nav-link {
@@ -116,9 +125,180 @@ body {
 	font-weight: 700;
 }
 
+.nav2-fix .nav-link:hover, .nav-masthead .nav-link:focus {
+    border-bottom-color: rgba(255, 255, 255, .25);
+}
+
+/* caused by the other nav bar being spread to width:100% and going over this one */
+.nav2-fix{
+	z-index:2;
+}
+
 /*
  * Footer
  */
 .mastfoot {
-	color: rgba(255, 255, 255, .5);
+	color: rgba(255, 255, 255, .75);
+}
+
+#veeBackground {
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	transform: translateY(35%);
+	opacity: 1%;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+ 	pointer-events: none;
+}
+
+#pageBg {
+	margin-top:5%;
+    background: url(../images/background.png) no-repeat 0 0 scroll;
+    height: 100%;
+    left: 0;
+    right:0;
+    overflow: hidden;
+    position: fixed;   
+    width: 100%;
+    z-index:2;
+    opacity:1%;
+    pointer-events: none;
+    background-position: center;
+    
+  	animation-name: heartbeat;
+  	animation-iteration-count: infinite;
+  	animation-duration: 0.75s;
+  	animation-direction: alternate;
+}
+#pageBgEffect{
+	background: url(../sprites/frostedGlass.png);
+    background-repeat: repeat;
+    opacity:100%;
+    height: 100%;
+    left: 0;
+    overflow: hidden;
+    position: fixed;   
+    top: 0;
+    width: 100%;
+    opacity:4%;
+    pointer-events: none;
+}
+
+#main {
+	left:50%;
+    transform: translateX(-50%);
+    top:50%;
+}
+
+#navbar{
+    display: flex;
+    justify-content: space-between;
+}
+
+#centered-nav{
+	left: 0px;
+    right: 0px;
+    position: absolute;
+}
+
+/*
+ * Simple animation
+ */
+ #logo{
+ 	transform: translate(-50%, -20%);
+	position:absolute;
+	top:0px;
+	left:50%;
+	z-index:0;
+ }
+ #logoImage{
+ 	transition: animation-duration 1s;
+ 	height:20rem;
+ 	animation-name: spin;
+	animation-duration: 5s;
+  	animation-iteration-count: infinite;
+  	animation-timing-function: linear;
+  	content:url("../images/circle.png");
+ }
+ #logoImage.beatFaster{
+ 	content:url("../images/circleTwist.png");
+ 	animation-duration: 2s;
+ }
+ 
+ #pageBg.beatFaster{
+  animation-duration: 0.5s !important;
+  animation-name: heartbeat2 !important;
+  }
+  
+  @keyframes spin {
+	    from {
+	        transform:rotate(0deg);
+	    }
+	    to {
+	        transform:rotate(360deg);
+	    }
+	}
+
+@keyframes heartbeat
+{
+  0%
+  {
+    transform: scale( 1 );
+  }
+  20%
+  {
+    transform: scale( 1 );
+  }
+  40%
+  {
+    transform: scale( 1 );
+  }
+  60%
+  {
+    transform: scale( 1 );
+    opacity: 1%;
+  }
+  80%
+  {
+    transform: scale( 1.03 );
+    opacity: 1.1%;
+  }
+  100%
+  {
+    transform: scale( 1 );
+    opacity: 1%;
+  }
+}
+
+@keyframes heartbeat2
+{
+  0%
+  {
+    transform: scale( 1 );
+  }
+  20%
+  {
+    transform: scale( 1 );
+  }
+  40%
+  {
+    transform: scale( 1 );
+  }
+  60%
+  {
+    transform: scale( 1 );
+    opacity: 1%;
+  }
+  80%
+  {
+    transform: scale( 1.05 );
+    opacity: 1.5%;
+  }
+  100%
+  {
+    transform: scale( 1 );
+    opacity: 1%;
+  }
 }

@@ -28,7 +28,7 @@
 	<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
 		<header class="masthead mb-auto">
 			<div class="inner">
-				<h3 class="masthead-brand">${setting.projectName}</h3>
+				<h3 class="masthead-brand">Vee's gaming brand</h3>
 				<nav class="nav nav-masthead justify-content-center">
 					<a class="nav-link" href="/ddd/">Home</a> <a
 						class="nav-link active" href="/ddd/demo">DEMO</a>
@@ -39,8 +39,7 @@
 		<main role="main" class="inner cover">
 			<h1 class="cover-heading">Coomer hotel demo.</h1>
 			<p class="lead">
-				Use arrow keys to move, x to interact.<br>To reset/restart just
-				refresh the page :)
+				Use arrow keys to move, x to interact.
 			</p>
 			<p class="lead">
 				<a href="#" class="btn btn-lg btn-secondary">Learn more</a>
@@ -49,10 +48,20 @@
 
 		<jsp:include page='components/footer.jsp' />
 	</div>
-	<div style="aspect-ratio: auto 800/600; background: 0% 0%/contain rgb(20, 21, 31);"></div>
-
+	
+<!-- 	<div style="aspect-ratio: auto 800/600; background: 0% 0%/contain rgb(20, 21, 31);"></div> -->
+<!-- 	<div style="aspect-ratio: auto 800/600; background: 0% 0%/contain rgb(20, 21, 31);"></div> -->
+	<canvas id="playArea" style="aspect-ratio: auto 800/600; background: 0% 0%/contain rgb(20, 21, 31);"></canvas>
+	
+	<script type="text/javascript" src="matter.min.js"></script>
+	<script type="text/javascript" src="/ddd/doublePendulum.js"></script>
 	<script type="text/javascript">
-		
+		$(()=>{
+			Example.doublePendulum();
+// 			console.log("Ready");
+// 			setup();
+// 			draw();
+		});
 	</script>
 </body>
 </html>
